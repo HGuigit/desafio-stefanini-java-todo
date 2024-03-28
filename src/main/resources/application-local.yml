@@ -1,8 +1,19 @@
 spring:
   datasource:
     driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost:1433;databaseName=??
-    username: # ??
-    password: # ??
+    url: jdbc:sqlserver://localhost:1433;databaseName=todolistdb;trustServerCertificate=true
+    password: ProjectTodoStefanini#2024
+    username: SA
+
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
+
+flyway:
+  enabled: true
+  url: jdbc:sqlserver://localhost:1433;databaseName=todolistdb;trustServerCertificate=true
+  username: SA
+  password: ProjectTodoStefanini#2024
+  locations: classpath:db/migration
+
