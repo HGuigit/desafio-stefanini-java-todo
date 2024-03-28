@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### SQL Server ###
-/src/main/resources/docker/data/
+/src/main/resources/docker/data/**
