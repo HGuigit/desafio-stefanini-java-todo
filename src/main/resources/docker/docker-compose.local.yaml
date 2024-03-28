@@ -16,3 +16,5 @@ services:
       - ./init-scripts/entrypoint.sh:/entrypoint.sh
       - ./init-scripts/initdb.sh:/initdb.sh
       - ./init-scripts/initdb.sql:/initdb.sql
+
+## docker-compose -f docker-compose.local.yaml -p stefanini-containers up
