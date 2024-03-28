@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost:1433;databaseName=??
-    username: # ??
-    password: # ??
+    url: jdbc:sqlserver://localhost:1433;databaseName=todolistdb
+    username: SA
+    password: ProjectTodoStefanini#2024
   jpa:
     show-sql: true

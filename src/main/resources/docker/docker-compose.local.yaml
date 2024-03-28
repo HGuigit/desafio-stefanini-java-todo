@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  sql_server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server_container
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - MSSQL_SA_PASSWORD=ProjectTodoStefanini#2024
+    ports:
+      - "1433:1433"
+    command: /bin/bash ./entrypoint.sh
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./init-scripts/entrypoint.sh:/entrypoint.sh
+      - ./init-scripts/initdb.sh:/initdb.sh
+      - ./init-scripts/initdb.sql:/initdb.sql
