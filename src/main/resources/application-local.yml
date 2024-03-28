@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=??
+    username: # ??
+    password: # ??
+  jpa:
+    show-sql: true
