@@ -1,5 +1,6 @@
 package com.stefanini.todolist.model;
 
+import com.stefanini.todolist.enums.TodoStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,14 +28,14 @@ public class Todo {
     @Column(name = "descricao")
     private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private TodoStatus status;
+    @Column(name = "status", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private TodoStatusEnum status;
 
-    @Column(name = "criado_em")
+    @Column(name = "criado_em", columnDefinition = "DATETIME DEFAULT GETDATE()")
     private LocalDateTime criadoEm;
 
-    @Column(name = "atualizado_em")
+    @Column(name = "atualizado_em", columnDefinition = "DATETIME DEFAULT GETDATE()")
     private LocalDateTime atualizadoEm;
 
 }
