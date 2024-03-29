@@ -13,4 +13,6 @@ public interface TarefaService {
     Todo buscarTodo(Integer id) throws RuntimeException;
 
     Page<Todo> buscarTodos(Pageable pageable);
+
+    Todo alterarTodo(Integer id, Todo newTodo) throws RuntimeException;
 }

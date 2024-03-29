@@ -53,4 +53,21 @@ public class TarefaServiceImpl implements TarefaService {
 
         return todos;
     }
+
+    @Override
+    public Todo alterarTodo(Integer id, Todo newTodo) throws RuntimeException {
+
+        Optional<Todo> todo = todoRepository.findById(id);
+
+        if(todo.isPresent()){
+            newTodo.setId(todo.get().getId());
+            newTodo.setCriadoEm(todo.get().getCriadoEm());
+            newTodo.setAtualizadoEm(LocalDateTime.now());
+
+            return todoRepository.save(newTodo);
+        } else {
+            throw new RuntimeException("Esse 'todo' não existe e não pode ser alterado.");
+        }
+
+    }
 }

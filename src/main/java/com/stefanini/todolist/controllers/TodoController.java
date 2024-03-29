@@ -33,7 +33,7 @@ public class TodoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Todo> buscarTodo(@PathVariable Integer id) throws RuntimeException {
+    public ResponseEntity<Todo> buscarTodo(@PathVariable(value = "id") Integer id) throws RuntimeException {
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefaService.buscarTodo(id));
     }
@@ -44,5 +44,15 @@ public class TodoController {
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefaService.buscarTodos(pageable));
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Todo> alterarTodo(@PathVariable(value = "id") Integer id, @RequestBody @Valid TodoDto todoDto){
+
+        Todo newTodo = new Todo();
+        BeanUtils.copyProperties(todoDto, newTodo);
+
+        return  ResponseEntity.status(HttpStatus.OK).body(tarefaService.alterarTodo(id, newTodo));
+    }
+
 
 }
