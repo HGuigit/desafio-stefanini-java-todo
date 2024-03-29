@@ -21,22 +21,20 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "titulo")
     private String titulo;
 
-    @Column(name = "descricao", columnDefinition = "NVARCHAR(MAX)")
+    @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "completa", columnDefinition = "BIT DEFAULT 0")
-    private Boolean completa;
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private TodoStatus status;
 
-    @Column(name = "status", columnDefinition = "NVARCHAR(20) DEFAULT 'Pendente'")
-    private String status;
-
-    @Column(name = "criado_em", columnDefinition = "DATETIME DEFAULT GETDATE()")
+    @Column(name = "criado_em")
     private LocalDateTime criadoEm;
 
-    @Column(name = "atualizado_em", columnDefinition = "DATETIME DEFAULT GETDATE()")
+    @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
 }
