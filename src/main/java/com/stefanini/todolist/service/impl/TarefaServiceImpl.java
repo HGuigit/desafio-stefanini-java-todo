@@ -70,4 +70,15 @@ public class TarefaServiceImpl implements TarefaService {
         }
 
     }
+
+    @Override
+    public void deletarTodo(Integer id) {
+        Optional<Todo> todo = todoRepository.findById(id);
+
+        if(todo.isPresent()) {
+            todoRepository.delete(todo.get());
+        } else {
+            throw new RuntimeException("O 'todo' com id: " + id + " não foi encontrado.");
+        }
+    }
 }

@@ -46,12 +46,20 @@ public class TodoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Todo> alterarTodo(@PathVariable(value = "id") Integer id, @RequestBody @Valid TodoDto todoDto){
+    public ResponseEntity<Todo> alterarTodo(@PathVariable(value = "id") Integer id, @RequestBody @Valid TodoDto todoDto) {
 
         Todo newTodo = new Todo();
         BeanUtils.copyProperties(todoDto, newTodo);
 
-        return  ResponseEntity.status(HttpStatus.OK).body(tarefaService.alterarTodo(id, newTodo));
+        return ResponseEntity.status(HttpStatus.OK).body(tarefaService.alterarTodo(id, newTodo));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarTodo(@PathVariable(value = "id") Integer id) {
+
+        tarefaService.deletarTodo(id);
+        return ResponseEntity.noContent().build();
+
     }
 
 
