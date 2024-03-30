@@ -1,9 +1,12 @@
+# Este docker-compose foi feito com a exclusividade de criar o banco de dados localmente para conexão através de rodar a
+# API no intellij ou o .jar compilado da aplicação com a variável local ativada.
+
 version: '3.7'
 
 services:
   sql_server:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql_server_container
+    container_name: sql_server_local_container
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Express
@@ -17,4 +20,5 @@ services:
       - ./init-scripts/initdb.sh:/initdb.sh
       - ./init-scripts/initdb.sql:/initdb.sql
 
-## docker-compose -f docker-compose.local.yaml -p stefanini-containers up
+
+# Comando para rodar docker compose --> docker compose -p containers-stefanini -f docker-compose.local.yaml up
