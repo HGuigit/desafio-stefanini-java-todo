@@ -13,7 +13,6 @@ jobs:
 
   build-mvn-project:
     runs-on: ubuntu-latest
-    needs: checkout-to-project
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -31,7 +30,7 @@ jobs:
 
   login-and-publish-docker-images:
     runs-on: ubuntu-latest
-    needs: [checkout-to-project, build-mvn-project]
+    needs: build-mvn-project
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
