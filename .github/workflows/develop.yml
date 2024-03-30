@@ -39,10 +39,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Spring Docker Image
-        run: docker build -t -f ./Dockerfile halfgui/todolist-spring:latest .
+        run: docker build -t halfgui/todolist-spring:latest -f ./Dockerfile .
 
       - name: Build Nginx Docker Image
-        run: docker build -t -f ./Dockerfile.nginx halfgui/todolist-nginx:latest .
+        run: docker build -t halfgui/todolist-nginx:latest -f ./Dockerfile.nginx  .
 
       - name: Push both images to dockerhub
         run: docker push halfgui/todolist-spring & docker push halfgui/todolist-nginx
