@@ -1,31 +1,36 @@
 package com.stefanini.todolist.service.impl;
 
+import com.stefanini.todolist.config.Messages;
+import com.stefanini.todolist.exception.ResourceAlreadyExistsException;
+import com.stefanini.todolist.exception.ResourceNotFoundException;
 import com.stefanini.todolist.model.Todo;
 import com.stefanini.todolist.repository.TodoRepository;
 import com.stefanini.todolist.service.TarefaService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TarefaServiceImpl implements TarefaService {
 
     @Autowired
-    TodoRepository todoRepository;
+    private Messages messages;
+
+    private TodoRepository todoRepository;
 
     @Override
-    public Todo criarNovoTodo(Todo todo) throws ResponseStatusException {
+    public Todo criarNovoTodo(Todo todo) throws ResourceAlreadyExistsException {
 
         Optional<Todo> existingTodo = todoRepository.findByTitulo(todo.getTitulo());
 
        if(existingTodo.isPresent()){
-           throw new ResponseStatusException(HttpStatus.CONFLICT, "Parece que esse 'todo' já existe.");
+           throw new ResourceAlreadyExistsException(messages.get("exception.todo.alreadyExists"));
        }
        todo.setAtualizadoEm(LocalDateTime.now());
        todo.setCriadoEm(LocalDateTime.now());
@@ -35,14 +40,14 @@ public class TarefaServiceImpl implements TarefaService {
     }
 
     @Override
-    public Todo buscarTodo(Integer id) throws RuntimeException {
+    public Todo buscarTodo(Integer id) throws ResourceNotFoundException {
 
         Optional<Todo> todo = todoRepository.findById(id);
 
         if(todo.isPresent()){
             return todo.get();
         } else {
-            throw new RuntimeException("Não foi possível encontrar o 'todo'.");
+            throw new ResourceNotFoundException(messages.get("exception.todo.notFound"));
         }
     }
 
@@ -55,7 +60,7 @@ public class TarefaServiceImpl implements TarefaService {
     }
 
     @Override
-    public Todo alterarTodo(Integer id, Todo newTodo) throws RuntimeException {
+    public Todo alterarTodo(Integer id, Todo newTodo) throws ResourceNotFoundException {
 
         Optional<Todo> todo = todoRepository.findById(id);
 
@@ -66,19 +71,19 @@ public class TarefaServiceImpl implements TarefaService {
 
             return todoRepository.save(newTodo);
         } else {
-            throw new RuntimeException("Esse 'todo' não existe e não pode ser alterado.");
+            throw new ResourceNotFoundException(messages.get("exception.todo.notFound"));
         }
 
     }
 
     @Override
-    public void deletarTodo(Integer id) {
+    public void deletarTodo(Integer id) throws ResourceNotFoundException {
         Optional<Todo> todo = todoRepository.findById(id);
 
         if(todo.isPresent()) {
             todoRepository.delete(todo.get());
         } else {
-            throw new RuntimeException("O 'todo' com id: " + id + " não foi encontrado.");
+            throw new ResourceNotFoundException(messages.get("exception.todo.notFound"));
         }
     }
 }

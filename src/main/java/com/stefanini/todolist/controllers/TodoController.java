@@ -1,6 +1,8 @@
 package com.stefanini.todolist.controllers;
 
 import com.stefanini.todolist.dto.TodoDto;
+import com.stefanini.todolist.exception.ResourceAlreadyExistsException;
+import com.stefanini.todolist.exception.ResourceNotFoundException;
 import com.stefanini.todolist.model.Todo;
 import com.stefanini.todolist.service.TarefaService;
 import jakarta.validation.Valid;
@@ -13,7 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(value = "/todos")
@@ -23,7 +24,7 @@ public class TodoController {
     TarefaService tarefaService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Todo> criarUmNovoTodo(@RequestBody @Valid TodoDto todoDto) throws ResponseStatusException {
+    public ResponseEntity<Todo> criarUmNovoTodo(@RequestBody @Valid TodoDto todoDto) throws ResourceAlreadyExistsException {
 
         Todo todo = new Todo();
         BeanUtils.copyProperties(todoDto, todo);
@@ -33,7 +34,7 @@ public class TodoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Todo> buscarTodo(@PathVariable(value = "id") Integer id) throws RuntimeException {
+    public ResponseEntity<Todo> buscarTodo(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefaService.buscarTodo(id));
     }
@@ -46,7 +47,7 @@ public class TodoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Todo> alterarTodo(@PathVariable(value = "id") Integer id, @RequestBody @Valid TodoDto todoDto) {
+    public ResponseEntity<Todo> alterarTodo(@PathVariable(value = "id") Integer id, @RequestBody @Valid TodoDto todoDto) throws ResourceNotFoundException {
 
         Todo newTodo = new Todo();
         BeanUtils.copyProperties(todoDto, newTodo);
@@ -55,7 +56,7 @@ public class TodoController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletarTodo(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<Void> deletarTodo(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
 
         tarefaService.deletarTodo(id);
         return ResponseEntity.noContent().build();
