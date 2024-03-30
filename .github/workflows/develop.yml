@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Spring Docker Image to DockerHub
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile
@@ -47,7 +47,7 @@ jobs:
           tags: halfgui/todolist-spring
 
       - name: Build and Push Nginx Docker Image to DockerHub
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile.nginx
