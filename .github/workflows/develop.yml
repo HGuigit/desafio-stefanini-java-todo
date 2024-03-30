@@ -37,7 +37,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+      - name: test file
+        run: ls
+      
       - name: Build Spring Docker Image
         run: docker build -t halfgui/todolist-spring:latest -f ./Dockerfile .
 
