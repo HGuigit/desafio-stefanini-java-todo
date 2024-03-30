@@ -1,0 +1,12 @@
+### DOCKER FILE NGINX ### PROXY REVERSE
+# usar a imagem nginx como base para criação da imagem
+FROM nginx:1.25.4-alpine
+
+## Trocar a configuração padrão do nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+CMD ["nginx", "-g", "daemon off;"]
+
