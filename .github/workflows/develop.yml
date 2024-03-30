@@ -59,7 +59,3 @@ jobs:
       #     file: Dockerfile
       #     push: true
       #     tags: your-dockerhub-username/your-nginx-project:latest
-
-    env:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
