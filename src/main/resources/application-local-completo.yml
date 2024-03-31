@@ -4,6 +4,8 @@ spring:
     url: jdbc:sqlserver://sql_server:1433;databaseName=todolistdb;trustServerCertificate=true
     password: ProjectTodoStefanini#2024
     username: SA
+    hikari:
+      connection-timeout: 35000
 
   jpa:
     show-sql: true

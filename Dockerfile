@@ -19,6 +19,4 @@ RUN wget -O - https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_
 
 EXPOSE 8082
 
-ENTRYPOINT ["dockerize", "-wait", "tcp://sql_server:1433", "-timeout", "120s"]
-
-CMD ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
