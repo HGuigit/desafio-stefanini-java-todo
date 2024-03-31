@@ -9,7 +9,7 @@ services:
       - spring-app-todolist-network
     tty: true
     container_name: spring-app-todolist-container
-    image: halfgui/todolist-spring
+    image: halfgui/todolist-spring:develop
     environment:
       - SPRING_PROFILE=dev
   nginx:
@@ -19,7 +19,7 @@ services:
     image: halfgui/todolist-nginx
     container_name: nginx-todolist
     networks:
-      - spring-app-todolist-network
+      - spring-app-todolist-network:develop
     ports:
       - "8082:80"
     depends_on:
