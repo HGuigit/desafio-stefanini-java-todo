@@ -1,24 +1,6 @@
-#Docker compose com os 3 containers para deploy em ambiente de desenvolvimento.
-version: '3.7'
+#Docker compose com os 2 containers para deploy em ambiente de desenvolvimento. O banco de dados aqui foi usado no Amazon RDS.
 
 services:
-  sql_server:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql_server_container
-    environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_PID=Express
-      - MSSQL_SA_PASSWORD=ProjectTodoStefanini#2024
-    ports:
-      - "1433:1433"
-    command: /bin/bash ./entrypoint.sh
-    networks:
-      - spring-app-todolist-network
-    volumes:
-      - ./data:/var/opt/mssql/data
-      - ./init-scripts/entrypoint.sh:/entrypoint.sh
-      - ./init-scripts/initdb.sh:/initdb.sh
-      - ./init-scripts/initdb.sql:/initdb.sql
   app_spring_todolist:
     build:
       context: ../../../../
@@ -30,8 +12,6 @@ services:
     image: halfgui/todolist-spring
     environment:
       - SPRING_PROFILE=dev
-    depends_on:
-      - sql_server
   nginx:
     build:
       context: ../../../../
@@ -49,7 +29,3 @@ services:
 networks:
   spring-app-todolist-network:
     driver: bridge
-
-
-# Comando para rodar docker compose --> docker compose -p containers-stefanini -f docker-compose.dev.yaml up
-# Comando para rodar docker compose buildando imagens conjuntamente --> docker compose -p containers-stefanini -f docker-compose.dev.yaml  up --build

@@ -39,10 +39,10 @@ jobs:
 
       - name: Build and Push Spring Docker Image
         run: |
-          docker build -t halfgui/todolist-spring:latest -f ./Dockerfile .
-          docker push halfgui/todolist-spring:latest
+          docker build -t halfgui/todolist-spring:develop -f ./Dockerfile .
+          docker push halfgui/todolist-spring:develop
 
       - name: Build and Push Nginx Docker Image
         run: |
-          docker build -t halfgui/todolist-nginx:latest -f ./Dockerfile-nginx .
-          docker push halfgui/todolist-nginx:latest
+          docker build -t halfgui/todolist-nginx:develop -f ./Dockerfile-nginx .
+          docker push halfgui/todolist-nginx:develop

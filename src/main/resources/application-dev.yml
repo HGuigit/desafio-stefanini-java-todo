@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://sql_server:1433;databaseName=todolistdb;trustServerCertificate=true
-    password: ProjectTodoStefanini#2024
-    username: SA
+    url: jdbc:sqlserver://database-todolist.cj2camc8unmp.us-east-1.rds.amazonaws.com;databaseName=todolistdb;trustServerCertificate=true
+    password: ProjectTodoStefanini#2024RDS
+    username: admin
 
   jpa:
     show-sql: true
@@ -12,8 +12,8 @@ spring:
 
 flyway:
   enabled: true
-  url: jdbc:sqlserver://sql_server:1433;databaseName=todolistdb;trustServerCertificate=true
-  username: SA
-  password: ProjectTodoStefanini#2024
+  url: jdbc:sqlserver://database-todolist.cj2camc8unmp.us-east-1.rds.amazonaws.com;databaseName=todolistdb;trustServerCertificate=true
+  username: admin
+  password: ProjectTodoStefanini#2024RDS
   locations: classpath:db/migration
 
