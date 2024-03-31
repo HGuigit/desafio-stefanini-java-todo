@@ -21,4 +21,4 @@ services:
       - ./init-scripts/initdb.sql:/initdb.sql
 
 
-# Comando para rodar docker compose --> docker compose -p containers-stefanini -f docker-compose.local.yaml up
+# Comando para rodar docker compose --> docker compose -p containers-stefanini -f docker-compose.local-desenvolvimento.yaml up
