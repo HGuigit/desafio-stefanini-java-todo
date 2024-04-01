@@ -69,4 +69,6 @@ jobs:
 
       - name: SSH into EC2 instance and run Docker Compose
         run: |
-          ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker-compose -f docker-compose.dev.yaml up -d"
+          ssh -i <(echo "$SSH_PRIVATE_KEY") ec2-user@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker compose pull && docker-compose -f docker-compose.dev.yaml up -d"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
