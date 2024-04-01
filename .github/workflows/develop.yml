@@ -66,7 +66,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: ./src/main/resources/docker/docker-compose.dev.yaml
           target: ./
-.
+
       - name: SSH into EC2 instance and run Docker Compose
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
