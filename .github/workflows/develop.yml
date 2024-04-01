@@ -46,3 +46,31 @@ jobs:
         run: |
           docker build -t halfgui/todolist-nginx:develop -f ./Dockerfile-nginx .
           docker push halfgui/todolist-nginx:develop
+  deploy:
+    needs: build-and-publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          ref: develop
+
+      - name: Install SSH client
+        run: sudo apt-get update && sudo apt-get install -y openssh-client
+
+      - name: Copy Docker Compose files to EC2 instance
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: ./src/main/resources/docker/docker-compose.dev.yaml
+          target: ./
+.
+      - name: SSH into EC2 instance and run Docker Compose
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker-compose pull && docker-compose -f docker-compose.dev.yaml up -d"
+          exit
+          rm -rf private_key.pem

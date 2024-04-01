@@ -16,10 +16,10 @@ services:
     build:
       context: ../../../../
       dockerfile: Dockerfile-nginx
-    image: halfgui/todolist-nginx
+    image: halfgui/todolist-nginx:develop
     container_name: nginx-todolist
     networks:
-      - spring-app-todolist-network:develop
+      - spring-app-todolist-network
     ports:
       - "8082:80"
     depends_on:
