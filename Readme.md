@@ -39,6 +39,8 @@ com um Enum a nível de código e uma coluna Varchar no banco.
 
 Porta: 8082
 
+endpoint AWS: ec2-44-221-28-211.compute-1.amazonaws.com:8082/todos
+
 **Clique no link e importe essa colection no seu client HTTP favorito (postman, etc...) para usar a API tanto na cloud quanto localmente:**
 
 [collection-http.json](collection%2Fcollection-http.json)
