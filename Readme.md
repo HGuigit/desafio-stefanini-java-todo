@@ -12,6 +12,20 @@ Nesse projeto foi desenvolvida uma simples aplicação de todo-list utilizando J
 ATENÇÃO: O Código principal está todo na BRANCH develop, a main só tem o código de inicialização do projeto, justamente por também não ter sido criado um ambiente de produção.
 
 
+### O Que foi implementado?
+
+- API com java Spring.
+- Endpoint para criar 'todos'.
+- Endpoints para listar 'todos'.
+- Endpoint para editar 'todos'.
+- Endpoint para deletar 'todos'.
+- Tratamento personalizado de exceções.
+- Migrations com Flyway no SQL Server Express.
+- Integração com Cloud AWS de um ambiente (ambiente  de dev).
+- Duas Pipelines CI / CD com github actions (pull requests e branch develop).
+- Dockerização da aplicação em três ambientes.
+- Servidor de Proxy Reverso com nginx.
+
 ## Estrutura da aplicação
 
 A aplicação está estruturada nas seguintes principais camadas:
