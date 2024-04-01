@@ -69,6 +69,8 @@ jobs:
 
       - name: SSH into EC2 instance and run Docker Compose
         run: |
-          echo ${{ secrets.EC2_SSH_KEY}} > /tmp/private_key.pem
-          chmod 600 /tmp/private_key.pem
-          ssh -i /tmp/private_key.pem {{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker-compose pull && docker-compose -f docker-compose.dev.yaml up -d"
+          mkdir ./temp
+          echo ${{ secrets.EC2_SSH_KEY}} > /temp/private_key.pem
+          cat /temp/private_key.pem
+          chmod 600 /temp/private_key.pem
+          ssh -i /temp/private_key.pem {{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker-compose pull && docker-compose -f docker-compose.dev.yaml up -d"
