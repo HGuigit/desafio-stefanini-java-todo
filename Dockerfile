@@ -19,4 +19,6 @@ RUN wget -O - https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_
 
 EXPOSE 8082
 
+RUN chmod +x entrypoint.sh
+
 ENTRYPOINT ["./entrypoint.sh"]

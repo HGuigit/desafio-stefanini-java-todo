@@ -71,7 +71,7 @@ jobs:
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
           chmod 600 private_key.pem
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker-compose pull && docker-compose -f docker-compose.dev.yaml up -d"
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ./src/main/resources/docker && docker-compose -f docker-compose.dev.yaml pull && docker-compose -f docker-compose.dev.yaml up -d"
           ls -a
           exit
           rm -rf private_key.pem
