@@ -39,6 +39,10 @@ com um Enum a nível de código e uma coluna Varchar no banco.
 
 Porta: 8082
 
+**Clique no link e importe essa colection no seu client HTTP favorito (postman, etc...) para usar a API tanto na cloud quanto localmente:**
+
+[collection-http](collection%2Fcollection-http)
+
 #### **-- GET**
 
 ```/todos/?page=*&size=*&sort=*,*``` --> Buscar todos os 'todos' de maneira paginada
