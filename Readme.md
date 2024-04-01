@@ -41,7 +41,7 @@ Porta: 8082
 
 **Clique no link e importe essa colection no seu client HTTP favorito (postman, etc...) para usar a API tanto na cloud quanto localmente:**
 
-[collection-http](collection%2Fcollection-http)
+[collection-http.json](collection%2Fcollection-http.json)
 
 #### **-- GET**
 
