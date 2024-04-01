@@ -2,9 +2,6 @@
 
 services:
   app_spring_todolist:
-    build:
-      context: ../../../../
-      dockerfile: Dockerfile
     networks:
       - spring-app-todolist-network
     tty: true
@@ -13,9 +10,6 @@ services:
     environment:
       - SPRING_PROFILE=dev
   nginx:
-    build:
-      context: ../../../../
-      dockerfile: Dockerfile-nginx
     image: halfgui/todolist-nginx:develop
     container_name: nginx-todolist
     networks:
